@@ -1,14 +1,35 @@
-.env
-*.sqlite
-*.pyc
-*.mo
-*.prof
-.python_history
-.tox
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+
+# uv
+uv-cache/
+
+# Testing
+.pytest_cache/
+.cache/
+htmlcov/
 .coverage
 .coverage.*
-htmlcov
-*.egg-info
-build
-dist
-.vscode
+coverage.xml
+
+# Type checking / linting
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store

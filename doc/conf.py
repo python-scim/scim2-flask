@@ -4,9 +4,14 @@ from importlib import metadata
 # -- General configuration ------------------------------------------------
 
 extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.viewcode",
     "sphinx_issues",
-    "myst_parser",
+    "sphinx_paramlinks",
+    "sphinx_reredirects",
 ]
 
 templates_path = ["_templates"]
@@ -15,14 +20,11 @@ project = "scim2-flask"
 year = datetime.datetime.now().strftime("%Y")
 copyright = f"{year}, Yaal Coop"
 author = "Yaal Coop"
-source_suffix = {
-    ".rst": "restructuredtext",
-    ".md": "markdown",
-}
-
+source_suffix = {".rst": "restructuredtext"}
 version = metadata.version("scim2-flask")
 language = "en"
 pygments_style = "sphinx"
+todo_include_todos = False
 toctree_collapse = False
 
 intersphinx_mapping = {
@@ -31,6 +33,9 @@ intersphinx_mapping = {
     "scim2_client": ("https://scim2-client.readthedocs.io/en/latest/", None),
     "scim2_tester": ("https://scim2-tester.readthedocs.io/en/latest/", None),
     "scim2_cli": ("https://scim2-cli.readthedocs.io/en/latest/", None),
+    "pydantic": ("https://docs.pydantic.dev/latest/", None),
+    "flask": ("https://flask.palletsprojects.com/en/stable/", None),
+    "werkzeug": ("https://werkzeug.palletsprojects.com/en/stable/", None),
 }
 
 # -- Sibling projects ------------------------------------------------------
@@ -119,6 +124,12 @@ html_context = {
     "source_version": "main",
     "source_docs_path": "/doc/",
 }
+
+# -- Options for doctest -------------------------------------------
+
+doctest_global_setup = """
+from scim2_flask import *
+"""
 
 # -- Options for sphinx-issues -------------------------------------
 
