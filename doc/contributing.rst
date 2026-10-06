@@ -15,8 +15,8 @@ A feature or a bugfix starts with a discussion on the
 Unit tests
 ----------
 
-Run ``uv run pytest`` before submitting a patch. Everything must pass before a patch can be
-merged.
+Run ``uv run pytest`` before submitting a patch. Run ``uv run tox`` to test every supported
+Python version. Everything must pass before a patch can be merged.
 
 The test coverage threshold is 100%. Check it with
 ``uv run pytest --cov --cov-fail-under=100 --cov-report=html``. The report is written to

@@ -26,7 +26,7 @@ def make_scim_client() -> Callable[[Flask], TestSCIMClient]:
         return TestSCIMClient(
             Client(app),
             scim_prefix="/scim/v2",
-            provider=app.extensions["scim2"]["scim2"].provider,
+            provider=app.extensions["scim"]["scim"].provider,
         )
 
     return make

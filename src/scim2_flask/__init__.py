@@ -1,5 +1,3 @@
-from .extension import SCIM2
-from .storage import ResourceNotFoundError
-from .storage import ScimStorage
+from .extension import ScimServer
 
-__all__ = ["SCIM2", "ResourceNotFoundError", "ScimStorage"]
+__all__ = ["ScimServer"]

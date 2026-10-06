@@ -17,6 +17,7 @@ requires-python = ">=3.11"
 dependencies = [
     "flask>=3.1.3",
     "scim2-models>=0.9.0",
+    "scim2-server>=0.6.1",
 ]
 
 [project.urls]
@@ -26,13 +27,13 @@ funding = "https://github.com/sponsors/python-scim"
 
 [dependency-groups]
 dev = [
-    "authlib>=1.8.0",
     "mypy>=2.3.1",
     "prek>=0.5.3",
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
     "scim2-client>=0.10.0",
     "scim2-tester>=0.4.0",
+    "tox-uv>=1.36.0",
 ]
 doc = [
     "shibuya>=2026.7.12",
@@ -92,9 +93,52 @@ init_typed = true
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
-addopts = "--doctest-modules --doctest-glob='*.rst'"
+addopts = "--doctest-modules --doctest-glob='*.rst' --ignore=doc/conf.py"
 doctest_optionflags= "ALLOW_UNICODE ELLIPSIS"
 
 [tool.uv]
 exclude-newer = "14 days"
 exclude-newer-package = { scim2-models = false, scim2-client = false, scim2-server = false, scim2-cli = false, scim2-tester = false, pytest-scim2-server = false }
+
+[tool.tox]
+requires = ["tox>=4.19"]
+env_list = [
+    "style",
+    "py311",
+    "py312",
+    "py313",
+    "py314",
+    "minversions",
+    "doc",
+    "coverage",
+]
+
+[tool.tox.env_run_base]
+runner = "uv-venv-lock-runner"
+dependency_groups = ["dev"]
+commands = [
+    ["pytest", "--showlocals", "--full-trace", "{posargs}"],
+]
+
+[tool.tox.env.style]
+runner = "uv-venv-runner"
+commands = [
+    ["prek", "run", "--all-files", "--show-diff-on-failure"],
+]
+
+[tool.tox.env.minversions]
+runner = "uv-venv-runner"
+uv_resolution = "lowest-direct"
+package = "editable"
+
+[tool.tox.env.doc]
+dependency_groups = ["doc"]
+commands = [
+    ["sphinx-build", "-W", "--keep-going", "--builder", "html", "doc", "build/sphinx/html"],
+]
+
+[tool.tox.env.coverage]
+commands = [
+    ["pytest", "--cov", "--cov-fail-under=100", "--cov-report", "term:skip-covered", "{posargs}"],
+    ["coverage", "html"],
+]

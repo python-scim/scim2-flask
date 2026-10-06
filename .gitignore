@@ -15,6 +15,7 @@ uv-cache/
 
 # Testing
 .pytest_cache/
+.tox/
 .cache/
 htmlcov/
 .coverage

@@ -1,6 +1,8 @@
 import datetime
 from importlib import metadata
 
+from docutils import nodes
+
 # -- General configuration ------------------------------------------------
 
 extensions = [
@@ -30,11 +32,11 @@ toctree_collapse = False
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
-    "authlib": ("https://docs.authlib.org/en/stable/", None),
     "scim2_models": ("https://scim2-models.readthedocs.io/en/latest/", None),
     "scim2_client": ("https://scim2-client.readthedocs.io/en/latest/", None),
     "scim2_tester": ("https://scim2-tester.readthedocs.io/en/latest/", None),
     "scim2_cli": ("https://scim2-cli.readthedocs.io/en/latest/", None),
+    "scim2_server": ("https://scim2-server.readthedocs.io/en/latest/", None),
     "pydantic": ("https://docs.pydantic.dev/latest/", None),
     "flask": ("https://flask.palletsprojects.com/en/stable/", None),
     "werkzeug": ("https://werkzeug.palletsprojects.com/en/stable/", None),
@@ -136,3 +138,42 @@ from scim2_flask import *
 # -- Options for sphinx-issues -------------------------------------
 
 issues_github_path = "python-scim/scim2-flask"
+
+# -- Options for sphinx-reredirects --------------------------------
+
+SCIM2_SERVER_DOC = "https://scim2-server.readthedocs.io/en/latest"
+SCIM2_MODELS_DOC = "https://scim2-models.readthedocs.io/en/latest"
+redirects = {
+    "tutorial": "overview.html",
+    "explanation/announced-features": f"{SCIM2_SERVER_DOC}/how-to/write-a-storage.html",
+    "explanation/extension-and-storage": f"{SCIM2_SERVER_DOC}/explanation/architecture.html",
+    "explanation/index": f"{SCIM2_SERVER_DOC}/explanation/index.html",
+    "explanation/limitations": f"{SCIM2_SERVER_DOC}/how-to/authenticate-the-clients.html",
+    "explanation/versioning": f"{SCIM2_SERVER_DOC}/explanation/storage.html",
+    "how-to/accept-bulk-requests": f"{SCIM2_SERVER_DOC}/explanation/bulk.html",
+    "how-to/announce-supported-features": f"{SCIM2_SERVER_DOC}/how-to/write-a-storage.html",
+    "how-to/change-resource-urls": "../integrate.html#choose-the-urls",
+    "how-to/check-conformance": f"{SCIM2_SERVER_DOC}/overview.html#check-a-server",
+    "how-to/connect-a-storage": "../integrate.html#commit-the-changes-of-each-request",
+    "how-to/index": "../integrate.html",
+    "how-to/protect-the-endpoints": "../integrate.html#authenticate-the-clients",
+    "how-to/serve-several-resource-types": f"{SCIM2_MODELS_DOC}/how-to/describe-a-scim-service.html",
+    "how-to/support-conditional-requests": f"{SCIM2_SERVER_DOC}/explanation/storage.html",
+    "how-to/tolerate-a-nonconformant-client": f"{SCIM2_MODELS_DOC}/how-to/tolerate-a-nonconformant-peer.html",
+}
+
+# -- Roles ----------------------------------------------------------------
+
+MDN_HEADERS_URL = "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/"
+
+
+def mdn_role(name, rawtext, text, lineno, inliner, options=None, content=None):
+    """Link an HTTP header to its MDN page, and render its name as code."""
+    reference = nodes.reference(
+        rawtext, "", nodes.literal(text, text), refuri=MDN_HEADERS_URL + text
+    )
+    return [reference], []
+
+
+def setup(app):
+    app.add_role("mdn", mdn_role)

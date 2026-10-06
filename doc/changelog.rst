@@ -6,5 +6,6 @@ Changelog
 
 Added
 ^^^^^
-- :class:`~scim2_flask.SCIM2`, a Flask extension serving the resource, search, bulk and discovery
-  endpoints of :rfc:`RFC 7644 <7644>` over a :class:`~scim2_flask.ScimStorage`.
+- :class:`~scim2_flask.ScimServer`, a Flask extension serving the endpoints of :rfc:`RFC 7644 <7644>`
+  over a :class:`~scim2_server.storage.ScimStorage`. The SCIM protocol is handled by
+  :doc:`scim2-server <scim2_server:index>`.

@@ -2,16 +2,18 @@
 
 A [Flask](https://flask.palletsprojects.com/) extension serving a SCIM 2.0 server, as
 [RFC7643](https://datatracker.ietf.org/doc/html/rfc7643) and
-[RFC7644](https://datatracker.ietf.org/doc/html/rfc7644) define it. It handles the protocol, and
-relies on [scim2-models](https://scim2-models.readthedocs.io/) to validate and serialize the
-payloads. The application provides the storage.
+[RFC7644](https://datatracker.ietf.org/doc/html/rfc7644) define it. It is built upon
+[scim2-server](https://scim2-server.readthedocs.io/) and
+[scim2-models](https://scim2-models.readthedocs.io/). The application provides the storage.
 
 ## Features
 
 - Resource endpoints: `POST`, `GET`, `PUT`, `PATCH` and `DELETE`, for every resource type
 - Search: `GET` and `POST /.search`, per resource type and at the server root
 - Discovery endpoints: `/ServiceProviderConfig`, `/ResourceTypes` and `/Schemas`
-- Bulk operations: `POST /Bulk`, with `failOnErrors`, `maxOperations` and `maxPayloadSize`
+- Bulk operations: `POST /Bulk`, with `bulkId` references, `failOnErrors`, `maxOperations` and
+  `maxPayloadSize`
+- `/Me`, once the application tells which resource the authenticated client stands for
 - Schema extensions, and several resource types sharing a schema
 - Conditional requests with ETags: `If-Match` and `If-None-Match`
 - SCIM error payloads for every failure
@@ -21,18 +23,19 @@ payloads. The application provides the storage.
 ```python
 from flask import Flask
 from scim2_models import ScimProvider, User
+from scim2_server.storage import ScimStorage
 
-from scim2_flask import SCIM2, ScimStorage
+from scim2_flask import ScimServer
 
 
 class MyStorage(ScimStorage):
-    """Implement query, search, create, update and delete against your own storage."""
+    """Implement get, search, create, update and delete against your own storage."""
 
     ...
 
 
 app = Flask(__name__)
-SCIM2(MyStorage(), ScimProvider(models=[User]), app=app)
+ScimServer(MyStorage(), ScimProvider(models=[User]), app=app)
 ```
 
 ## Installation
@@ -43,12 +46,10 @@ pip install scim2-flask
 
 ## Documentation
 
-- [Tutorial](https://scim2-flask.readthedocs.io/en/latest/tutorial.html) builds a first SCIM
-  server, step by step.
-- [How-to guides](https://scim2-flask.readthedocs.io/en/latest/how-to/index.html) cover focused
-  tasks, such as connecting your own storage.
-- [Explanation](https://scim2-flask.readthedocs.io/en/latest/explanation/index.html) covers the
-  choices behind the extension, and what it leaves out.
+- [Overview](https://scim2-flask.readthedocs.io/en/latest/overview.html) introduces the parts of
+  a SCIM server built with Flask.
+- [Integrate with the application](https://scim2-flask.readthedocs.io/en/latest/integrate.html)
+  covers authentication, transactions, URLs and request sizes.
 - [Reference](https://scim2-flask.readthedocs.io/en/latest/reference.html) lists the public API.
 
 ## What's SCIM anyway?
@@ -76,5 +77,6 @@ scim2-flask is released under the Apache-2.0 license.
 scim2-flask belongs in a collection of SCIM tools developed by [Yaal Coop](https://yaal.coop),
 with [scim2-models](https://github.com/python-scim/scim2-models),
 [scim2-client](https://github.com/python-scim/scim2-client),
+[scim2-server](https://github.com/python-scim/scim2-server),
 [scim2-tester](https://github.com/python-scim/scim2-tester) and
 [scim2-cli](https://github.com/python-scim/scim2-cli).
