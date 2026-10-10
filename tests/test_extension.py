@@ -6,6 +6,7 @@ from scim2_models import AuthenticationScheme
 from scim2_models import Bulk
 from scim2_models import ETag
 from scim2_models import Filter
+from scim2_models import Pagination
 from scim2_models import ResourceType
 from scim2_models import ScimProvider
 from scim2_models import ServiceProviderConfig
@@ -335,9 +336,58 @@ def test_steps_of_the_service_can_be_overridden():
     )
 
 
+def create_cursor_app(storage: InMemoryStorage, secret_key: str | None) -> Flask:
+    config = ServiceProviderConfig(pagination=Pagination(cursor=True, index=True))
+    app = Flask(__name__)
+    app.secret_key = secret_key
+    ScimServer(storage, create_provider(config), app=app)
+    return app
+
+
+def test_cursors_are_sealed_with_the_secret_key():
+    """A cursor from one process is accepted by another one with the same secret key."""
+    storage = InMemoryStorage()
+    first = Client(create_cursor_app(storage, "secret"))
+    second = Client(create_cursor_app(storage, "secret"))
+    for user_name in ("bjensen", "jsmith"):
+        first.post(
+            "/scim/v2/Users",
+            json={**USER, "userName": user_name},
+            content_type=SCIM_JSON,
+        )
+
+    page = first.get("/scim/v2/Users", query_string="cursor&count=1")
+    next_page = second.get(
+        "/scim/v2/Users",
+        query_string={"cursor": page.json["nextCursor"], "count": 1},
+    )
+
+    assert next_page.status_code == 200
+    user_names = {page.json["Resources"][0]["userName"]}
+    user_names.add(next_page.json["Resources"][0]["userName"])
+    assert user_names == {"bjensen", "jsmith"}
+
+
+def test_cursors_need_a_secret_key():
+    with pytest.raises(ValueError, match="SECRET_KEY"):
+        create_cursor_app(InMemoryStorage(), None)
+
+
+def test_given_service_keeps_its_own_secret():
+    config = ServiceProviderConfig(pagination=Pagination(cursor=True, index=True))
+    provider = create_provider(config)
+    app = Flask(__name__)
+    ScimServer(
+        InMemoryStorage(), provider, app=app, service=ScimService(provider, secret="s")
+    )
+
+    response = Client(app).get("/scim/v2/Users", query_string="cursor&count=1")
+    assert response.status_code == 200
+
+
 def test_unexpected_exceptions_reach_flask():
     class BrokenStorage(InMemoryStorage):
-        def search(self, resource_types, search_request):
+        def search(self, resource_types, search_request, *, position=None):
             raise RuntimeError("database is down")
 
     app = Flask(__name__)

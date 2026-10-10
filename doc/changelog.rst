@@ -1,6 +1,19 @@
 Changelog
 =========
 
+[0.2.0] - Unreleased
+--------------------
+
+Added
+^^^^^
+- Cursor pagination (:rfc:`RFC 9865 <9865>`). The cursors are encrypted with the
+  :data:`~flask:SECRET_KEY` of the application.
+
+Changed
+^^^^^^^
+- Requires scim2-server 0.8.0 and scim2-models 0.12.2.
+- :meth:`~scim2_flask.ScimServer.init_app` builds the service, rather than the constructor.
+
 [0.1.0] - 2026-10-06
 --------------------
 

@@ -53,9 +53,11 @@ class ScimServer:
     :param provider: The service description. It must declare at least one
         resource type.
     :param app: The application to register on right away, if any.
-    :param service: The service serving the requests, built upon ``provider``.
-        Pass a subclass of :class:`~scim2_server.service.ScimService` to change
-        one of its steps, such as the URL of the resources.
+    :param service: The service serving the requests. By default,
+        :meth:`init_app` builds one upon ``provider``, with the
+        :attr:`~flask.Flask.secret_key` of the application as the secret of
+        the cursors. Pass a subclass of :class:`~scim2_server.service.ScimService`
+        to change one of its steps, such as the URL of the resources.
     :param url_prefix: The URL prefix the SCIM endpoints are served under.
     :param name: The name of the blueprint, and so the prefix of its
         endpoints. Give each instance its own name to serve several SCIM
@@ -77,8 +79,7 @@ class ScimServer:
 
         self.storage = storage
         self.provider = provider
-        self.service = service if service is not None else ScimService(provider)
-        self.handler = ScimHandler(self.service, storage)
+        self._service = service
         self.url_prefix = url_prefix.rstrip("/")
         self.name = name
 
@@ -89,10 +90,26 @@ class ScimServer:
         """Register the SCIM blueprint on ``app``, under ``url_prefix``.
 
         The extension is then available in the ``"scim"`` entry of
-        :attr:`~flask.Flask.extensions`, under its ``name``.
+        :attr:`~flask.Flask.extensions`, under its ``name``. Load the
+        configuration of the application first: the default service reads
+        its :data:`~flask:SECRET_KEY` here.
+
+        :raises ValueError: When the configuration of the service announces
+            cursor pagination, and the application has no
+            :data:`~flask:SECRET_KEY`.
         """
+        self.service = self._service or self._create_service(app)
+        self.handler = ScimHandler(self.service, self.storage)
         app.register_blueprint(self.create_blueprint())
         app.extensions.setdefault(EXTENSION_NAME, {})[self.name] = self
+
+    def _create_service(self, app: Flask) -> ScimService:
+        try:
+            return ScimService(self.provider, secret=app.secret_key)
+        except ValueError as exception:
+            raise ValueError(
+                "Cursor pagination needs the SECRET_KEY of the application."
+            ) from exception
 
     def create_blueprint(self) -> Blueprint:
         """Return the :class:`~flask.Blueprint` serving the SCIM endpoints.

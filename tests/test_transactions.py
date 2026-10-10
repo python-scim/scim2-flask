@@ -23,7 +23,7 @@ class RecordingSession:
 
 
 class BrokenStorage(InMemoryStorage):
-    def search(self, resource_types, search_request):
+    def search(self, resource_types, search_request, *, position=None):
         raise RuntimeError("database is down")
 
 

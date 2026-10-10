@@ -2,7 +2,8 @@ Integrate with the application
 ==============================
 
 Use this guide to fit the SCIM endpoints into a Flask application: authenticate the clients,
-commit the changes of each request, choose the URLs and limit the size of the requests. It
+commit the changes of each request, choose the URLs, page with cursors and limit the size of the
+requests. It
 assumes a :class:`~scim2_server.storage.ScimStorage` and a :class:`~scim2_models.ScimProvider`,
 such as the ones of the :doc:`overview`.
 
@@ -11,7 +12,8 @@ The guide covers the Flask side only. The scim2-server guides cover the rest:
 - :doc:`scim2_server:how-to/write-a-storage`, to keep the resources in your own backend;
 - :doc:`scim2_server:how-to/authenticate-the-clients`, to limit what each client may do;
 - :doc:`scim2_server:how-to/serve-the-me-endpoint`, to serve ``/Me``;
-- :doc:`scim2_server:how-to/deploy-the-server`, to serve the resources at other URLs.
+- :doc:`scim2_server:how-to/deploy-the-server`, to serve the resources at other URLs;
+- :doc:`scim2_server:how-to/page-with-cursors`, to page with cursors.
 
 The examples come from the
 `examples <https://github.com/python-scim/scim2-flask/tree/main/examples>`_ directory, and reuse
@@ -149,6 +151,18 @@ The extension builds the URL of each resource from the host the request reached 
 ``url_prefix``. Behind a reverse proxy, Werkzeug's :class:`~werkzeug.middleware.proxy_fix.ProxyFix`
 makes these URLs use the host and scheme the proxy received, as
 :doc:`flask:deploying/proxy_fix` describes.
+
+Page with cursors
+-----------------
+
+The server encrypts the cursors with a secret. The extension takes the
+:data:`~flask:SECRET_KEY` of the application as this secret. Every process of the application
+needs the same one. :meth:`~scim2_flask.ScimServer.init_app` reads it, so load the configuration
+first. When the :class:`~scim2_models.ServiceProviderConfig` announces cursor pagination and the
+application has no :data:`~flask:SECRET_KEY`, :meth:`~scim2_flask.ScimServer.init_app` raises a
+:exc:`ValueError`.
+
+A :class:`~scim2_server.service.ScimService` passed as ``service`` keeps its own secret.
 
 Limit the size of the requests
 ------------------------------
