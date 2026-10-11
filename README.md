@@ -1,3 +1,5 @@
+<img alt="python-scim logo" src="https://raw.githubusercontent.com/python-scim/.github/refs/heads/main/python-scim.svg" height="72" align="right">
+
 # scim2-flask
 
 A [Flask](https://flask.palletsprojects.com/) extension serving a SCIM 2.0 server, as
