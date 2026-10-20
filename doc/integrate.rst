@@ -12,7 +12,7 @@ The guide covers the Flask side only. The scim2-server guides cover the rest:
 - :doc:`scim2_server:how-to/write-a-storage`, to keep the resources in your own backend;
 - :doc:`scim2_server:how-to/authenticate-the-clients`, to limit what each client may do;
 - :doc:`scim2_server:how-to/serve-the-me-endpoint`, to serve ``/Me``;
-- :doc:`scim2_server:how-to/deploy-the-server`, to serve the resources at other URLs;
+- :doc:`scim2_server:how-to/publish-the-resources-at-other-urls`, to serve the resources at other URLs;
 - :doc:`scim2_server:how-to/page-with-cursors`, to page with cursors.
 
 The examples come from the
