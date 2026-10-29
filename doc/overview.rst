@@ -125,3 +125,24 @@ application directly, without a network:
    >>> results = check_server(scim_client)
    >>> [result.title for result in results if result.status.name in ("ERROR", "CRITICAL")]
    []
+
+In the tests of the application, :class:`~scim2_tester.testing.ScimServerContract` runs the
+same checks as a pytest test, with a subtest per result. It needs the ``testing`` extra:
+
+.. code-block:: console
+
+   $ pip install scim2-tester[testing]
+
+Subclass it, and give it a ``scim_client`` fixture:
+
+.. code-block:: python
+
+   import pytest
+   from scim2_client.engines.wsgi import WSGISCIMClient
+   from scim2_tester.testing import ScimServerContract
+
+
+   class TestScimServer(ScimServerContract):
+       @pytest.fixture
+       def scim_client(self):
+           return WSGISCIMClient(create_app(), base_url="http://localhost/scim/v2")
