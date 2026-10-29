@@ -44,9 +44,9 @@ dev = [
     "prek>=0.5.3",
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
-    "scim2-client>=0.12.0",
+    "scim2-client>=0.14.0",
     "scim2-server[cursor]>=0.8.0",
-    "scim2-tester[testing]>=0.6.1",
+    "scim2-tester[testing]>=0.6.2",
     "tox-uv>=1.36.0",
 ]
 doc = [
