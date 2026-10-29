@@ -46,7 +46,7 @@ dev = [
     "pytest-cov>=7.1.0",
     "scim2-client>=0.12.0",
     "scim2-server[cursor]>=0.8.0",
-    "scim2-tester>=0.4.0",
+    "scim2-tester[testing]>=0.6.0",
     "tox-uv>=1.36.0",
 ]
 doc = [
@@ -109,6 +109,7 @@ init_typed = true
 pythonpath = ["."]
 addopts = "--doctest-modules --doctest-glob='*.rst' --ignore=doc/conf.py"
 doctest_optionflags= "ALLOW_UNICODE ELLIPSIS"
+filterwarnings = ["error::scim2_tester.testing.ScimDeviationWarning"]
 
 [tool.uv]
 exclude-newer = "14 days"
