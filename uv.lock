@@ -1309,14 +1309,14 @@ wheels = [
 
 [[package]]
 name = "scim2-client"
-version = "0.14.0"
+version = "0.14.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "scim2-models" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/14/88/e9435c81f9dae1b1c06a688ebdd8bb3f0a7c6d3a29eafb82b2d15745c5fb/scim2_client-0.14.0.tar.gz", hash = "sha256:9728682a65bcbb2e57bf65c7ef2bb64b79a3f4b3b38e8f40ce42201ba8060d65", size = 42481, upload-time = "2026-10-29T14:39:43.961Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/25/b1/c818a58b62b903034705b2a4e2e6ccc6cb10fd0f38e6a1746cb8ea08718c/scim2_client-0.14.1.tar.gz", hash = "sha256:6f60caa7f3df6657a28885bd7b3dbbe5773ffb747bdc3cee0eaf35cb02452bc7", size = 42464, upload-time = "2026-10-29T20:43:39.046Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e7/0b/469f70e3931f216cd904cef0b98e0f2dfec12b56e1c49c9c29e7b4072fd4/scim2_client-0.14.0-py3-none-any.whl", hash = "sha256:94d44be86cdb84c79fc10a32adf9410bd2e2af59e99877326f8810d53c2d71f4", size = 41486, upload-time = "2026-10-29T14:39:42.423Z" },
+    { url = "https://files.pythonhosted.org/packages/bf/42/d1f3d3a23aceafbef06a1335836fa073c7778fea332412bdca11caff3082/scim2_client-0.14.1-py3-none-any.whl", hash = "sha256:bf7c3f3cf9da7cb8e813eaf560cfeab8037f6c1b5ab81b56cf137d8f94d3b7cd", size = 41465, upload-time = "2026-10-29T20:43:37.548Z" },
 ]
 
 [[package]]
@@ -1392,14 +1392,14 @@ wheels = [
 
 [[package]]
 name = "scim2-server"
-version = "0.8.3"
+version = "0.8.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "scim2-models" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/eb/df/9f7f819c5e12d7c89f6df3eed750697d4bc7832fcd2aa53696f034c83282/scim2_server-0.8.3.tar.gz", hash = "sha256:e2f13a5bcbe898a46c2ae9a39c1e81479e7aae9d526442aa0fcc959b56ae3e3a", size = 65011, upload-time = "2026-10-25T22:49:34.735Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/37/1b/729dd308650a0c4d68a2ce770bda81143fbe3d6b6db2e95e72e03b459680/scim2_server-0.8.5.tar.gz", hash = "sha256:7c588773ccd60a93418b73fcd1bc98a3892dd71f13f2f107439ff3065784c0df", size = 66033, upload-time = "2026-10-30T19:23:05.361Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/53/eb/415ddddeb1741fd8d8e2132407e57698cbe9dbbfec8397db30b16b5a9c40/scim2_server-0.8.3-py3-none-any.whl", hash = "sha256:0273ef68779dcda28d97ab7523148bcd408c279fcb45f83503a121b3339cca4b", size = 67761, upload-time = "2026-10-25T22:49:33.553Z" },
+    { url = "https://files.pythonhosted.org/packages/9c/df/c743029ccea88d4e34aaf5dc283ae675eea1ac9150cb824b29e96374d349/scim2_server-0.8.5-py3-none-any.whl", hash = "sha256:b6956eb434ff99eb81719915e3a47e7a7e4d11c66429952bc6e908a35cd170e6", size = 69020, upload-time = "2026-10-30T19:23:03.96Z" },
 ]
 
 [package.optional-dependencies]
@@ -1409,15 +1409,15 @@ cursor = [
 
 [[package]]
 name = "scim2-tester"
-version = "0.6.2"
+version = "0.6.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "scim2-client" },
     { name = "scim2-models" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f7/eb/d67e9f78b64155af9519f7fe59474af9c8b009947826baff4a3dc50c3c10/scim2_tester-0.6.2.tar.gz", hash = "sha256:484f47d33082a75085186eb7cb211cbc2e26b5914b06f0baedfb70e8b0b63f47", size = 36514, upload-time = "2026-10-29T15:13:04.109Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f5/be/e0a68f67505a8e44e175ed003abf86b6bfeebf1b26dccd72163648678d99/scim2_tester-0.6.4.tar.gz", hash = "sha256:df8c582d391511ae7f0d35e0d7bfe4916c79571af22768ab96cc43599765b144", size = 38280, upload-time = "2026-10-29T23:07:42.514Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c9/98/b3391622f826cff28483c62bdd8911b90a4b1ebbc7640b8586e2ff843f49/scim2_tester-0.6.2-py3-none-any.whl", hash = "sha256:caaa25d1f5cdad078305f142149307d6b5f8a0c21518c2c9c06403a711089866", size = 49773, upload-time = "2026-10-29T15:13:02.826Z" },
+    { url = "https://files.pythonhosted.org/packages/41/16/132b11e3d1be4489ef5ca274c13e10966c994cafe1473be3c49a15be5fb1/scim2_tester-0.6.4-py3-none-any.whl", hash = "sha256:a4d5e522f228d2d2afaa147d66c641bc5659dcdde5967411fb4b830b08198a8a", size = 52094, upload-time = "2026-10-29T23:07:41.095Z" },
 ]
 
 [package.optional-dependencies]
