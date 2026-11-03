@@ -58,7 +58,7 @@ class ScimServer:
         :attr:`~flask.Flask.secret_key` of the application as the secret of
         the cursors. Pass a subclass of :class:`~scim2_server.service.ScimService`
         to change one of its steps, such as the URL of the resources.
-    :param url_prefix: The URL prefix the SCIM endpoints are served under.
+    :param url_prefix: The URL prefix of the SCIM endpoints.
     :param name: The name of the blueprint, and so the prefix of its
         endpoints. Give each instance its own name to serve several SCIM
         servers from one application.

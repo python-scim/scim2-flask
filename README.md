@@ -59,8 +59,8 @@ pip install scim2-flask
 SCIM stands for System for Cross-domain Identity Management, and it is a provisioning protocol.
 Provisioning is the action of managing a set of resources across different services, usually
 users and groups. SCIM is often used between Identity Providers and applications, alongside
-standards like OAuth2 and OpenID Connect. It allows users and groups creations, modifications and
-deletions to be synchronized between applications.
+standards like OAuth2 and OpenID Connect. It synchronizes the creation, modification and
+deletion of users and groups between applications.
 
 ## Getting help
 

@@ -15,8 +15,9 @@ rest:
 - authentication and authorization, since the extension leaves every endpoint open.
 
 This documentation addresses Python developers who build a SCIM server with Flask. It assumes
-familiarity with Flask applications. It covers what is specific to Flask: the storage, the service
-and the protocol rules are described in the :doc:`scim2-server documentation <scim2_server:index>`.
+familiarity with Flask applications. It covers what is specific to Flask. The
+:doc:`scim2-server documentation <scim2_server:index>` describes the storage, the service and the
+protocol rules.
 
 .. code-block:: shell
 
