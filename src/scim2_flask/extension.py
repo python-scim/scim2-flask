@@ -49,7 +49,7 @@ class ScimServer:
             scim_server.init_app(app)
             return app
 
-    :param storage: The storage the extension reads and writes resources in.
+    :param storage: The storage that holds the resources.
     :param provider: The service description. It must declare at least one
         resource type.
     :param app: The application to register on right away, if any.
