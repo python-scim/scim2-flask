@@ -6,9 +6,9 @@ Flask application. It exposes the endpoints of :rfc:`RFC 7644 <7644>` in a
 :class:`~flask.Blueprint`, and leaves the protocol to :doc:`scim2-server <scim2_server:index>` and
 the payloads to :doc:`scim2-models <scim2_models:index>`.
 
-scim2-flask does not store the resources itself. The application provides a
+scim2-flask does not store the resources itself. Your application provides a
 :class:`~scim2_server.storage.ScimStorage` that reads and writes them, for example in its
-database. The application also authenticates the clients.
+database. Your application also authenticates the clients.
 
 Install scim2-flask. It brings Flask, scim2-server and scim2-models along:
 
@@ -16,10 +16,9 @@ Install scim2-flask. It brings Flask, scim2-server and scim2-models along:
 
    $ pip install scim2-flask
 
-This page introduces the parts of a SCIM server built with Flask, in the order an application
-meets them. Follow it in order for a first tour. :doc:`integrate` covers the authentication, the
-transactions, the URLs and the size of the requests, and the :doc:`reference` lists the complete
-API.
+This page introduces the parts of a SCIM server built with Flask, in the order you need them.
+Follow it in order for a first tour. :doc:`integrate` covers the authentication, the transactions,
+the URLs and the size of the requests, and the :doc:`reference` lists the complete API.
 
 Describe the service
 --------------------
@@ -53,13 +52,13 @@ stops:
 
 The endpoints live under ``/scim/v2``. To serve the resources of your own database, write a
 storage as :doc:`scim2_server:how-to/write-a-storage` describes, or
-:doc:`scim2_server:how-to/serve-an-existing-data-model` for tables the application already has.
+:doc:`scim2_server:how-to/serve-an-existing-data-model` for tables your application already has.
 Pass it in place of the in-memory one.
 
 Serve a request
 ---------------
 
-The application now answers SCIM requests. The examples send them with the
+Your application now answers SCIM requests. The examples send them with the
 :meth:`test client <flask.Flask.test_client>` of Flask, which simulates HTTP requests without
 running a server. Create a user, and read it back at its location:
 
@@ -127,7 +126,7 @@ application directly, without a network:
    >>> [result.title for result in results if result.status.name in ("ERROR", "CRITICAL")]
    []
 
-In the tests of the application, :class:`~scim2_tester.testing.ScimServerContract` runs the
+In the tests of your application, :class:`~scim2_tester.testing.ScimServerContract` runs the
 same checks as a pytest test, with a subtest per result. It needs the ``testing`` extra:
 
 .. code-block:: console

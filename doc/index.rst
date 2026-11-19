@@ -6,7 +6,7 @@ scim2-flask is a :doc:`Flask <flask:index>` :doc:`extension <flask:extensions>` 
 resource, search, bulk and discovery endpoints. It is built upon
 :doc:`scim2-server <scim2_server:index>` and :doc:`scim2-models <scim2_models:index>`.
 
-The extension serves the SCIM protocol. The Flask application that registers it provides the
+The extension serves the SCIM protocol. Your Flask application provides the
 rest:
 
 - a :class:`~scim2_server.storage.ScimStorage`, which reads and writes the resources;
@@ -27,9 +27,9 @@ Choose a path
 -------------
 
 :doc:`Overview <overview>` introduces the parts of a SCIM server built with Flask, in the order
-an application meets them.
+you need them.
 
-:doc:`Integrate with the application <integrate>` shows how to authenticate the clients, commit
+:doc:`Integrate with your application <integrate>` shows how to authenticate the clients, commit
 the changes of each request, choose the URLs and limit the size of the requests.
 
 :doc:`Reference <reference>` lists the complete public API.
@@ -39,7 +39,7 @@ the changes of each request, choose the URLs and limit the size of the requests.
     :hidden:
 
     Overview <overview>
-    Integrate with the application <integrate>
+    Integrate with your application <integrate>
     Reference <reference>
     Contributing <contributing>
     Changelog <changelog>

@@ -6,7 +6,7 @@ A [Flask](https://flask.palletsprojects.com/) extension serving a SCIM 2.0 serve
 [RFC7643](https://datatracker.ietf.org/doc/html/rfc7643) and
 [RFC7644](https://datatracker.ietf.org/doc/html/rfc7644) define it. It is built upon
 [scim2-server](https://scim2-server.readthedocs.io/) and
-[scim2-models](https://scim2-models.readthedocs.io/). The application provides the storage.
+[scim2-models](https://scim2-models.readthedocs.io/). Your application provides the storage.
 
 ## Features
 
@@ -15,7 +15,7 @@ A [Flask](https://flask.palletsprojects.com/) extension serving a SCIM 2.0 serve
 - Discovery endpoints: `/ServiceProviderConfig`, `/ResourceTypes` and `/Schemas`
 - Bulk operations: `POST /Bulk`, with `bulkId` references, `failOnErrors`, `maxOperations` and
   `maxPayloadSize`
-- `/Me`, once the application tells which resource the authenticated client stands for
+- `/Me`, once your application tells which resource the authenticated client stands for
 - Schema extensions, and several resource types sharing a schema
 - Conditional requests with ETags: `If-Match` and `If-None-Match`
 - SCIM error payloads for every failure
@@ -50,7 +50,7 @@ pip install scim2-flask
 
 - [Overview](https://scim2-flask.readthedocs.io/en/latest/overview.html) introduces the parts of
   a SCIM server built with Flask.
-- [Integrate with the application](https://scim2-flask.readthedocs.io/en/latest/integrate.html)
+- [Integrate with your application](https://scim2-flask.readthedocs.io/en/latest/integrate.html)
   covers authentication, transactions, URLs and request sizes.
 - [Reference](https://scim2-flask.readthedocs.io/en/latest/reference.html) lists the public API.
 

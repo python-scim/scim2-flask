@@ -1,7 +1,7 @@
-Integrate with the application
-==============================
+Integrate with your application
+===============================
 
-Use this guide to fit the SCIM endpoints into a Flask application: authenticate the clients,
+Use this guide to fit the SCIM endpoints into your Flask application: authenticate the clients,
 commit the changes of each request, choose the URLs, page with cursors and limit the size of the
 requests. It
 assumes a :class:`~scim2_server.storage.ScimStorage` and a :class:`~scim2_models.ScimProvider`,
@@ -96,7 +96,7 @@ others:
    :language: python
    :pyobject: TransactionalScimServer
 
-Pass the database session of the application, such as ``db.session`` with
+Pass the database session of your application, such as ``db.session`` with
 `Flask-SQLAlchemy <https://flask-sqlalchemy.readthedocs.io>`_:
 
 .. code-block:: python
@@ -156,7 +156,7 @@ Page with cursors
 -----------------
 
 The server encrypts the cursors with a secret. The extension takes the
-:data:`~flask:SECRET_KEY` of the application as this secret. Every process of the application
+:data:`~flask:SECRET_KEY` of your application as this secret. Every process of your application
 needs the same one. :meth:`~scim2_flask.ScimServer.init_app` reads it, so load the configuration
 first. When the :class:`~scim2_models.ServiceProviderConfig` announces cursor pagination and the
 application has no :data:`~flask:SECRET_KEY`, :meth:`~scim2_flask.ScimServer.init_app` raises a
