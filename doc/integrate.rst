@@ -73,11 +73,17 @@ announced schemes:
    >>> client.get("/scim/v2/ServiceProviderConfig").status_code
    200
 
-The service reads the subject in two methods: :meth:`~scim2_server.service.ScimService.authorize`
-accepts or refuses each operation, and :meth:`~scim2_server.service.ScimService.me_target` finds
-the resource ``/Me`` stands for. To override them, subclass
-:class:`~scim2_server.service.ScimService`, and pass an instance to the ``service`` parameter of
-:class:`~scim2_flask.ScimServer`.
+By default, every authenticated client may run every operation, and ``/Me`` answers ``501``. To
+change this, subclass :class:`~scim2_server.service.ScimService`, and pass an instance to the
+``service`` parameter of :class:`~scim2_flask.ScimServer`:
+
+- override :meth:`~scim2_server.service.ScimService.authorize` to limit what each client may do,
+  such as a client that may only read;
+- override :meth:`~scim2_server.service.ScimService.me_target` to serve ``/Me``, with the
+  resource of the authenticated client.
+
+:doc:`scim2_server:how-to/authenticate-the-clients` and
+:doc:`scim2_server:how-to/serve-the-me-endpoint` describe these methods.
 
 Commit the changes of each request
 ----------------------------------

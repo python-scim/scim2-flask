@@ -15,7 +15,7 @@ A [Flask](https://flask.palletsprojects.com/) extension serving a SCIM 2.0 serve
 - Discovery endpoints: `/ServiceProviderConfig`, `/ResourceTypes` and `/Schemas`
 - Bulk operations: `POST /Bulk`, with `bulkId` references, `failOnErrors`, `maxOperations` and
   `maxPayloadSize`
-- `/Me`, once your application tells which resource the authenticated client stands for
+- `/Me`, once your application tells which resource belongs to the authenticated client
 - Schema extensions, and several resource types sharing a schema
 - Conditional requests with ETags: `If-Match` and `If-None-Match`
 - SCIM error payloads for every failure
