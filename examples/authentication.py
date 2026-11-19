@@ -26,8 +26,8 @@ class ProtectedScimServer(ScimServer):
         def check_token() -> None:
             if request.endpoint == f"{self.name}.service_provider_config":
                 return
-            token = request.headers.get("Authorization", "").removeprefix("Bearer ")
-            if token not in TOKENS:
+            scheme, _, token = request.headers.get("Authorization", "").partition(" ")
+            if scheme.lower() != "bearer" or token not in TOKENS:
                 raise UnauthorizedException(detail="Missing or invalid token")
             g.client = TOKENS[token]
 
